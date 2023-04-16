@@ -1,37 +1,63 @@
 import React, { useState, useEffect } from "react";
 import { Field, ErrorMessage } from "formik";
-import { Html5QrcodeScanner } from "html5-qrcode";
+// import { Html5QrcodeScanner } from "html5-qrcode";
 import { Html5Qrcode } from "html5-qrcode";
 
 const SampleBag = ({ bagNumber, index }) => {
   const [scannedData, setScannedData] = useState("");
 
   function handleScanButtonClick() {
+    // This method will trigger user permissions
     Html5Qrcode.getCameras()
       .then((devices) => {
+        /**
+         * devices would be an array of objects of type:
+         * { id: "id", label: "label" }
+         */
         if (devices && devices.length) {
-          const cameraId = devices[0].id;
-          const html5QrCode = new Html5Qrcode("qr-reader");
-          const qrCodeSuccessCallback = (decodedText) => {
+          console.log("entered if (devices && devices.length)");
+          var cameraId = devices[0].id;
+          // .. use this to start scanning.
+          const html5QrCode = new Html5Qrcode("reader");
+          const qrCodeSuccessCallback = (decodedText, decodedResult) => {
+            /* handle success */
             setScannedData(decodedText);
-            html5QrCode.stop();
+            console.log(scannedData);
+            html5QrCode
+              .stop()
+              .then((ignore) => {
+                // QR Code scanning is stopped.
+              })
+              .catch((err) => {
+                // Stop failed, handle it.
+              });
           };
           const config = { fps: 10, qrbox: { width: "auto", height: "auto" } };
-          html5QrCode
-            .start(
-              { deviceId: { exact: cameraId } },
-              config,
-              qrCodeSuccessCallback
-            )
-            .catch((error) => {
-              console.error("Failed to start scanning", error);
-            });
-        } else {
-          console.error("No cameras found");
+
+          // ************  Back Camera hardcoded
+          html5QrCode.start(
+            { facingMode: "environment" },
+            config,
+            qrCodeSuccessCallback
+          );
+
+          // // ************  Back Camera
+          // html5QrCode.start(
+          //   { deviceId: { exact: cameraId } },
+          //   config,
+          //   qrCodeSuccessCallback
+          // );
+
+          // *** front camera
+          // html5QrCode.start(
+          //   { facingMode: "user" },
+          //   config,
+          //   qrCodeSuccessCallback
+          // );
         }
       })
-      .catch((error) => {
-        console.error("Failed to get cameras", error);
+      .catch((err) => {
+        // handle err
       });
   }
 
