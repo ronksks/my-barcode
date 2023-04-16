@@ -16,7 +16,7 @@ const SampleBag = ({ bagNumber, index }) => {
             setScannedData(decodedText);
             html5QrCode.stop();
           };
-          const config = { fps: 10, qrbox: { width: 250, height: 250 } };
+          const config = { fps: 10, qrbox: { width: "auto", height: "auto" } };
           html5QrCode
             .start(
               { deviceId: { exact: cameraId } },
