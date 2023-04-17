@@ -43,6 +43,13 @@ const SampleBag = ({ bagNumber, index }) => {
               config,
               qrCodeSuccessCallback
             );
+            // wait 2 seconds to guarantee the camera has already started to apply the focus mode and zoom...
+            setTimeout(function () {
+              html5QrCode.applyVideoConstraints({
+                focusMode: "continuous",
+                advanced: [{ zoom: 2.0 }],
+              });
+            }, 2000);
           } catch (error) {
             console.log("Unable to start scanning.", error);
           }
