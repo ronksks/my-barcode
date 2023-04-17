@@ -32,7 +32,7 @@ const SampleBag = ({ bagNumber, index }) => {
           };
           const config = {
             fps: 100,
-            qrbox: { width: 300, height: 300 },
+            qrbox: { width: 250, height: 250 },
             aspectRatio: 1,
           };
 
@@ -87,7 +87,6 @@ const SampleBag = ({ bagNumber, index }) => {
         >
           Scan
         </button>
-
         <div id="reader"></div>
 
         <Field
