@@ -47,7 +47,7 @@ const SampleBag = ({ bagNumber, index }) => {
             setTimeout(function () {
               html5QrCode.applyVideoConstraints({
                 focusMode: "continuous",
-                advanced: [{ zoom: 2.0 }],
+                advanced: [{ zoom: 4.0 }],
               });
             }, 2000);
           } catch (error) {
