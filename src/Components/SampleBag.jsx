@@ -47,9 +47,9 @@ const SampleBag = ({ bagNumber, index }) => {
             setTimeout(function () {
               html5QrCode.applyVideoConstraints({
                 focusMode: "continuous",
-                advanced: [{ zoom: 8.0 }],
+                advanced: [{ zoom: 2.0 }],
               });
-            }, 1000);
+            }, 2000);
           } catch (error) {
             console.log("Unable to start scanning.", error);
           }
