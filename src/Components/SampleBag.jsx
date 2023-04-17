@@ -30,7 +30,11 @@ const SampleBag = ({ bagNumber, index }) => {
                 // Stop failed, handle it.
               });
           };
-          const config = { fps: 100, qrbox: 200, aspectRatio: 1 };
+          const config = {
+            fps: 100,
+            qrbox: { width: 250, height: 250 },
+            aspectRatio: 1,
+          };
 
           // ************  Back Camera hardcoded
           try {
