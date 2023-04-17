@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { Field, ErrorMessage } from "formik";
 // import { Html5QrcodeScanner } from "html5-qrcode";
 import { Html5Qrcode } from "html5-qrcode";
@@ -15,8 +15,6 @@ const SampleBag = ({ bagNumber, index }) => {
          * { id: "id", label: "label" }
          */
         if (devices && devices.length) {
-          console.log("entered if (devices && devices.length)");
-          var cameraId = devices[0].id;
           // .. use this to start scanning.
           const html5QrCode = new Html5Qrcode("reader");
           const qrCodeSuccessCallback = (decodedText, decodedResult) => {
@@ -32,14 +30,18 @@ const SampleBag = ({ bagNumber, index }) => {
                 // Stop failed, handle it.
               });
           };
-          const config = { fps: 10, qrbox: { width: "auto", height: "auto" } };
+          const config = { fps: 100, qrbox: 200, aspectRatio: 1 };
 
           // ************  Back Camera hardcoded
-          html5QrCode.start(
-            { facingMode: "environment" },
-            config,
-            qrCodeSuccessCallback
-          );
+          try {
+            html5QrCode.start(
+              { facingMode: { exact: "environment" } },
+              config,
+              qrCodeSuccessCallback
+            );
+          } catch (error) {
+            console.log("Unable to start scanning.", error);
+          }
 
           // // ************  Back Camera
           // html5QrCode.start(
