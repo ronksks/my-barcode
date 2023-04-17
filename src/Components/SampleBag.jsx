@@ -9,6 +9,7 @@ const SampleBag = ({ bagNumber, index }) => {
   const [showScanner, setShowScanner] = useState(false);
   function handleScannedData(data) {
     setScannedData(data);
+    showScanner(false);
   }
 
   function handleScanButtonClick() {
