@@ -33,7 +33,7 @@ const SampleBag = ({ bagNumber, index }) => {
           const config = {
             fps: 100,
             qrbox: { width: 250, height: 250 },
-            aspectRatio: 2,
+            aspectRatio: 1,
           };
 
           // ************  Back Camera hardcoded
@@ -47,9 +47,9 @@ const SampleBag = ({ bagNumber, index }) => {
             setTimeout(function () {
               html5QrCode.applyVideoConstraints({
                 focusMode: "continuous",
-                advanced: [{ zoom: 2.0 }],
+                advanced: [{ zoom: 4.0 }],
               });
-            }, 2000);
+            }, 1500);
           } catch (error) {
             console.log("Unable to start scanning.", error);
           }
