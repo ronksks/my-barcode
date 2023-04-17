@@ -49,7 +49,7 @@ const SampleBag = ({ bagNumber, index }) => {
                 focusMode: "continuous",
                 advanced: [{ zoom: 2.0 }],
               });
-            }, 1000);
+            }, 2000);
           } catch (error) {
             console.log("Unable to start scanning.", error);
           }
