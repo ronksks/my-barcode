@@ -1,32 +1,19 @@
 import React, { useState } from "react";
-
 import { Html5Qrcode } from "html5-qrcode";
-function ScannerComponent(scannedData) {
+
+function ScannerComponent({ scannedData }) {
   const [scannedDataInScanner, setScannedDataInScanner] = useState("");
+
+  const handleQrCodeSuccess = (decodedText, decodedResult) => {
+    setScannedDataInScanner(decodedText);
+    scannedData(decodedText); // pass the scanned data back to the SampleBag component
+    Html5Qrcode.stop(); // stop scanning
+  };
 
   Html5Qrcode.getCameras()
     .then((devices) => {
-      /**
-       * devices would be an array of objects of type:
-       * { id: "id", label: "label" }
-       */
       if (devices && devices.length) {
-        // .. use this to start scanning.
         const html5QrCode = new Html5Qrcode("reader");
-        const qrCodeSuccessCallback = (decodedText, decodedResult) => {
-          /* handle success */
-          setScannedDataInScanner(decodedText);
-          scannedData = scannedDataInScanner;
-          console.log(scannedData);
-          html5QrCode
-            .stop()
-            .then((ignore) => {
-              // QR Code scanning is stopped.
-            })
-            .catch((err) => {
-              // Stop failed, handle it.
-            });
-        };
         const config = {
           fps: 100,
           qrbox: {
@@ -36,14 +23,12 @@ function ScannerComponent(scannedData) {
           aspectRatio: 1,
         };
 
-        // ************  Back Camera hardcoded
         try {
           html5QrCode.start(
             { facingMode: { exact: "environment" } },
             config,
-            qrCodeSuccessCallback
+            handleQrCodeSuccess
           );
-          // wait 2 seconds to guarantee the camera has already started to apply the focus mode and zoom...
           setTimeout(function () {
             html5QrCode.applyVideoConstraints({
               focusMode: "continuous",
@@ -53,26 +38,13 @@ function ScannerComponent(scannedData) {
         } catch (error) {
           console.log("Unable to start scanning.", error);
         }
-
-        // // ************  Back Camera
-        // html5QrCode.start(
-        //   { deviceId: { exact: cameraId } },
-        //   config,
-        //   qrCodeSuccessCallback
-        // );
-
-        // *** front camera
-        // html5QrCode.start(
-        //   { facingMode: "user" },
-        //   config,
-        //   qrCodeSuccessCallback
-        // );
       }
     })
     .catch((err) => {
-      // handle err
+      console.log("Error getting cameras", err);
     });
 
   return <div id="reader"></div>;
 }
+
 export default ScannerComponent;
