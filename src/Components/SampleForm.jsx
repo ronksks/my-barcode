@@ -30,7 +30,6 @@ const validationSchema = Yup.object().shape({
 
 const SampleForm = () => {
   const [bagNumber, setBagNumber] = useState(1);
-  const [barcodeScan, setBarcodeScan] = useState("No Barcode Found");
 
   function getTotalSampleBagWeight(sampleBags) {
     return sampleBags.reduce((totalWeight, bag) => {
