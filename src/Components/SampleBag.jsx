@@ -32,7 +32,10 @@ const SampleBag = ({ bagNumber, index }) => {
           };
           const config = {
             fps: 100,
-            qrbox: { width: 250, height: 250 },
+            qrbox: {
+              width: window.screen.width < 600 ? 200 : 300,
+              height: window.screen.width < 600 ? 100 : 100,
+            },
             aspectRatio: 1,
           };
 
