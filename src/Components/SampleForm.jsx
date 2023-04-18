@@ -21,7 +21,7 @@ const validationSchema = Yup.object().shape({
   sampleBags: Yup.array()
     .of(
       Yup.object().shape({
-        barcode: Yup.string().required("Barcode is required"),
+        // barcode: Yup.string().required("Barcode is required"),
         weight: Yup.number().required("Weight is required"),
       })
     )
@@ -101,6 +101,7 @@ const SampleForm = () => {
                         barcode: "",
                         weight: "",
                         bagNumber,
+                        // ADDED************************************
                         barcodeData: "",
                       });
                       setBagNumber((prevBagNumber) => prevBagNumber + 1);
