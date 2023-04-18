@@ -34,7 +34,7 @@ const SampleForm = () => {
   return (
     <div className="form-container">
       <h2>Sample Form</h2>
-      
+
       <Formik
         initialValues={initialValues}
         validationSchema={validationSchema}
@@ -44,7 +44,6 @@ const SampleForm = () => {
           // alert(values.sampleBags[0].FieldArray[0]);
         }}
       >
-
         {({ values, touched, isSubmitting }) => (
           <Form className="form">
             <div className="form-group">
