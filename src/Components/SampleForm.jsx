@@ -23,6 +23,9 @@ const validationSchema = Yup.object().shape({
 });
 
 const SampleForm = () => {
+  const getBarcodeData = (data) => {
+    alert(data);
+  };
   const [bagNumber, setBagNumber] = useState(1);
 
   function getTotalSampleBagWeight(sampleBags) {
@@ -64,7 +67,7 @@ const SampleForm = () => {
                         <SampleBag
                           index={index}
                           bagNumber={sampleBag.bagNumber}
-                          barcodeData={sampleBag.barcode}
+                          getBarcode={getBarcodeData}
                         />
                         <button
                           type="button"

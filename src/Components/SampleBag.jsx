@@ -4,9 +4,12 @@ import { Html5Qrcode } from "html5-qrcode";
 import ScannerComponent from "./ScannerComponent";
 // import { v4 as uuidv4 } from "uuid"; // import uuid
 
-const SampleBag = ({ bagNumber, index, barcodeData }) => {
+const SampleBag = ({ bagNumber, index, getBarcode }) => {
   const [scannedData, setScannedData] = useState("");
   const [showScanner, setShowScanner] = useState(false);
+
+
+  getBarcode(scannedData);
 
   return (
     <div className="sample-bag">
@@ -39,6 +42,7 @@ const SampleBag = ({ bagNumber, index, barcodeData }) => {
           name={`sampleBags.${index}.barcode`}
           value={scannedData}
         />
+        alert(scannedData)
         <ErrorMessage
           className="error"
           component="div"
