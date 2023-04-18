@@ -40,7 +40,7 @@ const SampleBag = ({ bagNumber, index, getBarcode }) => {
           id={`sampleBags.${index}.barcode`}
           name={`sampleBags.${index}.barcode`}
           // value={scannedData}
-          setValue={scannedData}
+          value={scannedData}
         />
         <ErrorMessage
           className="error"
