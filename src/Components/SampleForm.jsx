@@ -97,7 +97,7 @@ const SampleForm = () => {
                     onClick={() => {
                       push({ barcode: "", weight: "", bagNumber });
                       setBagNumber((prevBagNumber) => prevBagNumber + 1);
-                      alert(values.sampleBags);
+                      alert(values.sampleBags[values.sampleBags.length]);
                     }}
                   >
                     Add Sample Bag
