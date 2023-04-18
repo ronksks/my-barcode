@@ -70,8 +70,7 @@ const SampleBag = ({ bagNumber, index, barcodeData }) => {
             <ScannerComponent
               scannedData={(data) => {
                 setScannedData(data);
-                alert(data);
-                setShowScanner(false);
+C                setShowScanner(false);
               }}
               readerId={`reader-${index}`}
             />
