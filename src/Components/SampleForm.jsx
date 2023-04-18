@@ -46,7 +46,7 @@ const SampleForm = () => {
         onSubmit={(values) => {
           console.log("submited");
           console.log(values.sampleBags);
-          alert(values.sampleBags);
+          alert(values.sampleBags[0].FieldArray);
         }}
       >
         {({ values, touched, isSubmitting }) => (
