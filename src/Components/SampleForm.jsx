@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useReducer } from "react";
 import { Formik, Form, Field, FieldArray, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import "../Styles/SampleFormStyle.css";
 import SampleBag from "./SampleBag";
+import ScannerComponent from "./ScannerComponent";
 
 const initialValues = {
   seedsWeight: "",
@@ -74,6 +75,7 @@ const SampleForm = () => {
                           className="btn remove"
                           onClick={() => {
                             remove(index);
+                            setBagNumber((prevBagNumber) => prevBagNumber - 1);
                             //TODO check what to do if remove
                             // setBagNumber((prevBagNumber) => prevBagNumber -1);
                           }}

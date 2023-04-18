@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { Field, ErrorMessage } from "formik";
-import { Html5Qrcode } from "html5-qrcode";
 import ScannerComponent from "./ScannerComponent";
 // import { v4 as uuidv4 } from "uuid"; // import uuid
 
@@ -19,7 +18,7 @@ const SampleBag = ({ bagNumber, index, getBarcode }) => {
         <button
           type="button"
           className="btn btn-secondary"
-          onClick={() => setShowScanner(true)}
+          onClick={() => setShowScanner(!showScanner)}
         >
           Scan
         </button>
@@ -40,7 +39,6 @@ const SampleBag = ({ bagNumber, index, getBarcode }) => {
           id={`sampleBags.${index}.barcode`}
           name={`sampleBags.${index}.barcode`}
           // value={scannedData}
-          value={scannedData}
         />
         <ErrorMessage
           className="error"
