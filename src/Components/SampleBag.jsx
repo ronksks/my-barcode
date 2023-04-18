@@ -68,9 +68,8 @@ const SampleBag = ({ bagNumber, index, barcodeData }) => {
           <div>
             <div id={`reader-${index}`}></div>
             <ScannerComponent
-              scannedData={(data) => {
+              scannedDataFromScanner={(data) => {
                 setScannedData(data);
-                alert(data);
                 setShowScanner(false);
               }}
               readerId={`reader-${index}`}
@@ -83,6 +82,7 @@ const SampleBag = ({ bagNumber, index, barcodeData }) => {
           name={`sampleBags.${index}.barcode`}
           value={scannedData}
         />
+        alert(scannedData);
         <ErrorMessage
           className="error"
           component="div"
