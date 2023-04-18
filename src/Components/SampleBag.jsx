@@ -7,7 +7,7 @@ import { v4 as uuidv4 } from "uuid"; // import uuid
 const SampleBag = ({ bagNumber, index }) => {
   const [scannedData, setScannedData] = useState("");
   const [showScanner, setShowScanner] = useState(false);
-  const [readerId] = useState(uuidv4()); // generate a unique id for this SampleBag component
+  // const [readerId] = useState(uuidv4()); // generate a unique id for this SampleBag component
 
   // function handleScanButtonClick() {
   //   Html5Qrcode.getCameras()
