@@ -63,7 +63,7 @@ const SampleForm = () => {
               {({ insert, remove, push }) => (
                 <>
                   {values.sampleBags.length > 0 &&
-                    values.sampleBags.map((sampleBag, index) => (
+                    values.sampleBags.map((sampleBag, index,) => (
                       <div key={index}>
                         <SampleBag
                           index={index}

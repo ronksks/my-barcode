@@ -2,54 +2,11 @@ import React, { useState } from "react";
 import { Field, ErrorMessage } from "formik";
 import { Html5Qrcode } from "html5-qrcode";
 import ScannerComponent from "./ScannerComponent";
-import { v4 as uuidv4 } from "uuid"; // import uuid
+// import { v4 as uuidv4 } from "uuid"; // import uuid
 
 const SampleBag = ({ bagNumber, index, barcodeData }) => {
   const [scannedData, setScannedData] = useState("");
   const [showScanner, setShowScanner] = useState(false);
-  // const [readerId] = useState(uuidv4()); // generate a unique id for this SampleBag component
-
-  // function handleScanButtonClick() {
-  //   Html5Qrcode.getCameras()
-  //     .then((devices) => {
-  //       if (devices && devices.length) {
-  //         const html5QrCode = new Html5Qrcode(readerId); // use the unique id for the scanner component
-  //         const qrCodeSuccessCallback = (decodedText, decodedResult) => {
-  //           setScannedData(decodedText);
-  //           console.log(scannedData);
-  //           html5QrCode
-  //             .stop()
-  //             .then((ignore) => {})
-  //             .catch((err) => {});
-  //         };
-  //         const config = {
-  //           fps: 100,
-  //           qrbox: {
-  //             width: window.screen.width < 600 ? 200 : 300,
-  //             height: window.screen.width < 600 ? 100 : 100,
-  //           },
-  //           aspectRatio: 1,
-  //         };
-
-  //         try {
-  //           html5QrCode.start(
-  //             { facingMode: { exact: "environment" } },
-  //             config,
-  //             qrCodeSuccessCallback
-  //           );
-  //           setTimeout(function () {
-  //             html5QrCode.applyVideoConstraints({
-  //               focusMode: "continuous",
-  //               advanced: [{ zoom: 2.0 }],
-  //             });
-  //           }, 2000);
-  //         } catch (error) {
-  //           console.log("Unable to start scanning.", error);
-  //         }
-  //       }
-  //     })
-  //     .catch((err) => {});
-  // }
 
   return (
     <div className="sample-bag">
@@ -66,13 +23,13 @@ const SampleBag = ({ bagNumber, index, barcodeData }) => {
         </button>
         {showScanner && (
           <div>
-            <div id={`reader-${index}`}></div>
+            {/* <div id={`reader-${index}`}></div> */}
             <ScannerComponent
               scannedDataFromScanner={(data) => {
                 setScannedData(data);
                 setShowScanner(false);
               }}
-              readerId={`reader-${index}`}
+              // readerId={`reader-${index}`}
             />
           </div>
         )}
@@ -82,7 +39,6 @@ const SampleBag = ({ bagNumber, index, barcodeData }) => {
           name={`sampleBags.${index}.barcode`}
           value={scannedData}
         />
-        alert(scannedData);
         <ErrorMessage
           className="error"
           component="div"
@@ -107,6 +63,51 @@ const SampleBag = ({ bagNumber, index, barcodeData }) => {
   );
 };
 export default SampleBag;
+
+//********* */
+// const [readerId] = useState(uuidv4()); // generate a unique id for this SampleBag component
+
+// function handleScanButtonClick() {
+//   Html5Qrcode.getCameras()
+//     .then((devices) => {
+//       if (devices && devices.length) {
+//         const html5QrCode = new Html5Qrcode(readerId); // use the unique id for the scanner component
+//         const qrCodeSuccessCallback = (decodedText, decodedResult) => {
+//           setScannedData(decodedText);
+//           console.log(scannedData);
+//           html5QrCode
+//             .stop()
+//             .then((ignore) => {})
+//             .catch((err) => {});
+//         };
+//         const config = {
+//           fps: 100,
+//           qrbox: {
+//             width: window.screen.width < 600 ? 200 : 300,
+//             height: window.screen.width < 600 ? 100 : 100,
+//           },
+//           aspectRatio: 1,
+//         };
+
+//         try {
+//           html5QrCode.start(
+//             { facingMode: { exact: "environment" } },
+//             config,
+//             qrCodeSuccessCallback
+//           );
+//           setTimeout(function () {
+//             html5QrCode.applyVideoConstraints({
+//               focusMode: "continuous",
+//               advanced: [{ zoom: 2.0 }],
+//             });
+//           }, 2000);
+//         } catch (error) {
+//           console.log("Unable to start scanning.", error);
+//         }
+//       }
+//     })
+//     .catch((err) => {});
+// }
 
 //************ working ************ */
 // import React, { useState } from "react";
