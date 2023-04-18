@@ -46,6 +46,7 @@ const SampleForm = () => {
         onSubmit={(values) => {
           console.log("submited");
           console.log(values.sampleBags);
+          alert(values.sampleBags[values.sampleBags.length]);
         }}
       >
         {({ values, touched, isSubmitting }) => (
@@ -63,7 +64,7 @@ const SampleForm = () => {
               {({ insert, remove, push }) => (
                 <>
                   {values.sampleBags.length > 0 &&
-                    values.sampleBags.map((sampleBag, index,) => (
+                    values.sampleBags.map((sampleBag, index) => (
                       <div key={index}>
                         <SampleBag
                           index={index}
@@ -96,7 +97,12 @@ const SampleForm = () => {
                         values.seedsWeight && values.sampleBags.length > 0
                     }
                     onClick={() => {
-                      push({ barcode: "", weight: "", bagNumber });
+                      push({
+                        barcode: "",
+                        weight: "",
+                        bagNumber,
+                        barcodeData: "",
+                      });
                       setBagNumber((prevBagNumber) => prevBagNumber + 1);
                       // alert(values.sampleBags[values.sampleBags.length]);
                     }}
