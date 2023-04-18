@@ -24,7 +24,7 @@ const validationSchema = Yup.object().shape({
 
 const SampleForm = () => {
   const getBarcodeData = (data) => {
-    alert(data);
+    return;
   };
   const [bagNumber, setBagNumber] = useState(1);
 

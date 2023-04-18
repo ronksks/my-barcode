@@ -8,7 +8,6 @@ const SampleBag = ({ bagNumber, index, getBarcode }) => {
   const [scannedData, setScannedData] = useState("");
   const [showScanner, setShowScanner] = useState(false);
 
-
   getBarcode(scannedData);
 
   return (
@@ -40,9 +39,9 @@ const SampleBag = ({ bagNumber, index, getBarcode }) => {
           type="text"
           id={`sampleBags.${index}.barcode`}
           name={`sampleBags.${index}.barcode`}
-          value={scannedData}
+          // value={scannedData}
+          setValue={scannedData}
         />
-        alert(scannedData)
         <ErrorMessage
           className="error"
           component="div"
