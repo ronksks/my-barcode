@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/my-barcode/static/css/main.04ad2ca6.css",
-    "main.js": "/my-barcode/static/js/main.defdd7df.js",
+    "main.js": "/my-barcode/static/js/main.fd50f4cf.js",
     "static/js/787.cacf7646.chunk.js": "/my-barcode/static/js/787.cacf7646.chunk.js",
     "index.html": "/my-barcode/index.html",
     "main.04ad2ca6.css.map": "/my-barcode/static/css/main.04ad2ca6.css.map",
-    "main.defdd7df.js.map": "/my-barcode/static/js/main.defdd7df.js.map",
+    "main.fd50f4cf.js.map": "/my-barcode/static/js/main.fd50f4cf.js.map",
     "787.cacf7646.chunk.js.map": "/my-barcode/static/js/787.cacf7646.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.04ad2ca6.css",
-    "static/js/main.defdd7df.js"
+    "static/js/main.fd50f4cf.js"
   ]
 }
