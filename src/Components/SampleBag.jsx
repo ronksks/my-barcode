@@ -1,18 +1,27 @@
 import React, { useState } from "react";
 import { Field, ErrorMessage } from "formik";
 import { Html5Qrcode } from "html5-qrcode";
+import ScannerComponent from "./ScannerComponent";
+import { v4 as uuidv4 } from "uuid"; // import uuid
 
 const SampleBag = ({ bagNumber, index }) => {
   const [scannedData, setScannedData] = useState("");
   const [showScanner, setShowScanner] = useState(false);
-  const [html5QrCode, setHtml5QrCode] = useState(null);
-
-  const readerId = `reader-${index}`;
+  const [readerId] = useState(uuidv4()); // generate a unique id for this SampleBag component
 
   function handleScanButtonClick() {
     Html5Qrcode.getCameras()
       .then((devices) => {
         if (devices && devices.length) {
+          const html5QrCode = new Html5Qrcode(readerId); // use the unique id for the scanner component
+          const qrCodeSuccessCallback = (decodedText, decodedResult) => {
+            setScannedData(decodedText);
+            console.log(scannedData);
+            html5QrCode
+              .stop()
+              .then((ignore) => {})
+              .catch((err) => {});
+          };
           const config = {
             fps: 100,
             qrbox: {
@@ -23,44 +32,25 @@ const SampleBag = ({ bagNumber, index }) => {
           };
 
           try {
-            const qrCodeSuccessCallback = (decodedText, decodedResult) => {
-              setScannedData(decodedText);
-              html5QrCode
-                .stop()
-                .then((ignore) => {
-                  // QR Code scanning is stopped.
-                })
-                .catch((err) => {
-                  // Stop failed, handle it.
-                });
-            };
-
-            const newHtml5QrCode = new Html5Qrcode(readerId);
-            newHtml5QrCode.start(
+            html5QrCode.start(
               { facingMode: { exact: "environment" } },
               config,
               qrCodeSuccessCallback
             );
-
-            // wait 2 seconds to guarantee the camera has already started to apply the focus mode and zoom...
             setTimeout(function () {
-              newHtml5QrCode.applyVideoConstraints({
+              html5QrCode.applyVideoConstraints({
                 focusMode: "continuous",
                 advanced: [{ zoom: 2.0 }],
               });
             }, 2000);
-
-            setHtml5QrCode(newHtml5QrCode);
-            setShowScanner(true);
           } catch (error) {
             console.log("Unable to start scanning.", error);
           }
         }
       })
-      .catch((err) => {
-        // handle err
-      });
+      .catch((err) => {});
   }
+
   return (
     <div className="sample-bag">
       <h4>Sample Bag {bagNumber}</h4>
@@ -70,12 +60,22 @@ const SampleBag = ({ bagNumber, index }) => {
         <button
           type="button"
           className="btn btn-secondary"
-          onClick={handleScanButtonClick}
+          onClick={() => setShowScanner(true)}
         >
           Scan
         </button>
-        <div id={readerId}></div>
-        {/* {showScanner && <ScannerComponent scannedData={handleScannedData} />} */}
+        {showScanner && (
+          <div>
+            <div id={`reader-${index}`}></div>
+            <ScannerComponent
+              scannedData={(data) => {
+                setScannedData(data);
+                setShowScanner(false);
+              }}
+              readerId={`reader-${index}`}
+            />
+          </div>
+        )}
         <Field
           type="text"
           id={`sampleBags.${index}.barcode`}
@@ -102,20 +102,6 @@ const SampleBag = ({ bagNumber, index }) => {
           name={`sampleBags.${index}.weight`}
         />
       </div>
-      {showScanner && (
-        <Html5Qrcode
-          id={readerId}
-          className="html5-qrcode-reader"
-          onScanSuccess={(decodedText, decodedResult) => {
-            setScannedData(decodedText);
-            console.log(scannedData);
-            setShowScanner(false);
-          }}
-          onError={(err) => {
-            console.log("Error: " + err);
-          }}
-        />
-      )}
     </div>
   );
 };
@@ -132,7 +118,7 @@ export default SampleBag;
 //   const [scannedData, setScannedData] = useState("");
 //   const [showScanner, setShowScanner] = useState(false);
 //   // generate a unique id for this SampleBag component
-//   const readerId = `reader-${index}`;
+//   // const readerId = `reader-${index}`;
 
 //   // function handleScannedData(data) {
 //   //   setScannedData(data);
