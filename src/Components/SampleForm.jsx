@@ -68,7 +68,6 @@ const SampleForm = () => {
                         <SampleBag
                           index={index}
                           bagNumber={sampleBag.bagNumber}
-                          getBarcode={getBarcodeData}
                         />
                         <button
                           type="button"

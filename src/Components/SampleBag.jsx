@@ -7,8 +7,6 @@ const SampleBag = ({ bagNumber, index, getBarcode }) => {
   const [scannedData, setScannedData] = useState("");
   const [showScanner, setShowScanner] = useState(false);
 
-  getBarcode(scannedData);
-
   return (
     <div className="sample-bag">
       <h4>Sample Bag {bagNumber}</h4>
@@ -34,11 +32,12 @@ const SampleBag = ({ bagNumber, index, getBarcode }) => {
             />
           </div>
         )}
+
         <Field
           type="text"
           id={`sampleBags.${index}.barcode`}
           name={`sampleBags.${index}.barcode`}
-          // value={scannedData}
+          value={scannedData}
         />
         <ErrorMessage
           className="error"
