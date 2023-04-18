@@ -4,7 +4,7 @@ import { Html5Qrcode } from "html5-qrcode";
 import ScannerComponent from "./ScannerComponent";
 import { v4 as uuidv4 } from "uuid"; // import uuid
 
-const SampleBag = ({ bagNumber, index }) => {
+const SampleBag = ({ bagNumber, index, barcodeData }) => {
   const [scannedData, setScannedData] = useState("");
   const [showScanner, setShowScanner] = useState(false);
   // const [readerId] = useState(uuidv4()); // generate a unique id for this SampleBag component
@@ -70,6 +70,7 @@ const SampleBag = ({ bagNumber, index }) => {
             <ScannerComponent
               scannedData={(data) => {
                 setScannedData(data);
+                alert(data);
                 setShowScanner(false);
               }}
               readerId={`reader-${index}`}

@@ -68,6 +68,7 @@ const SampleForm = () => {
                         <SampleBag
                           index={index}
                           bagNumber={sampleBag.bagNumber}
+                          barcodeData={sampleBag.barcode}
                         />
                         <button
                           type="button"
